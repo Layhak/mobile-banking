@@ -18,3 +18,7 @@ spring:
     generate-ddl: true
 file:
   storage-dir: "filestorage/images/"
+  client-dir: "/images/**"
+springdoc:
+  swagger-ui:
+    path: /
