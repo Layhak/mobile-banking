@@ -11,14 +11,15 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, String> {
     boolean existsByUsername(String username);
 
-@Modifying
-@Transactional
-@Query("UPDATE User u SET u.isDeleted = :status WHERE u.id = :userId")
-int updateDeletedStatusById(String userId, boolean status);
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.isDeleted = :status WHERE u.id = :userId")
+    int updateDeletedStatusById(String userId, boolean status);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.isBlocked = :status WHERE u.id = :userId")
+    int updateBlockedStatusById(String userId, boolean status);
 
-@Modifying
-@Transactional
-@Query("UPDATE User u SET u.isBlocked = :status WHERE u.id = :userId")
-int updateBlockedStatusById(String userId, boolean status);    boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
 }
