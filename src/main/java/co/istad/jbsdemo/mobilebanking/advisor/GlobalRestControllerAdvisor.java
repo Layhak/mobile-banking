@@ -15,6 +15,7 @@ import java.util.TreeMap;
 
 @RestControllerAdvice
 public class GlobalRestControllerAdvisor {
+
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public BaseResponse<?> handleNoSuchElementException(NoSuchElementException ex) {
@@ -23,7 +24,7 @@ public class GlobalRestControllerAdvisor {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public BaseResponse<?> handeMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public BaseResponse<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         TreeMap<String, Object> errors = new TreeMap<>();
         ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());

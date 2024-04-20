@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface UserMapper {
+    @Named("toUserResponse")
     @Mapping(target = "roles", expression = "java(mapRoles(user.getRoles()))")
 //    @Mapping(target = "studentIdCard", source = "studentIdCard")
     UserResponse toUserResponse(User user);
@@ -23,7 +24,12 @@ public interface UserMapper {
     @Mapping(target = "roles", ignore = true)
     User toUser(UserRequest userRequest);
 
-    @Mapping(target = "roles", ignore = true)
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateUserFromRequest(@MappingTarget User user, UserUpdateRequest updateRequest);
+    void updateUserFromRequest(@MappingTarget User updateUser, UserUpdateRequest userUpdateRequest);
+
+
+    //    @Mapping(target = "user", source = "user")
+//    @Mapping(target = "user", source = "user", qualifiedByName = "toUserResponse")
+//    void setUserForAccountResponse(@MappingTarget AccountResponse accountResponse, User user);
+
+
 }
